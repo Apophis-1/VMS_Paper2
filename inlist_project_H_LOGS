@@ -1,0 +1,14 @@
+&controls
+
+! -- starting specifications (mass and metallicity) --
+initial_mass =300
+initial_z =0.008
+
+log_directory ='/Users/gauthamsabhahit/Documents/mesa-r12115/VMS_paper2/MODELS/LOGS_300_0.4Z_sol'
+
+! -- opacities (massive star defaults) --
+use_Type2_opacities = .true.
+Zbase =0.008
+
+
+/ ! end of controls namelist

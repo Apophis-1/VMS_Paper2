@@ -1,0 +1,148 @@
+
+
+&star_job
+
+    load_saved_model = .true.
+    saved_model_name = 'H_burning.mod'
+
+
+  ! -- prevent pgstar closing before terminating --
+    !pause_before_terminate = .true.
+
+
+  ! -- save the last pgstar output --
+    save_pgstar_files_when_terminate = .true.
+    
+
+  ! -- save model after hydrogen burning --
+    save_model_when_terminate = .true.
+    save_model_filename = 'He_burning.mod'
+
+
+  ! -- display on-screen plots --
+    pgstar_flag = .true.
+
+    
+  ! -- opacity table --
+    kappa_file_prefix = 'gs98'
+    show_kap_info = .true.
+
+
+  ! -- Z fractions --
+    initial_zfracs = 3
+
+
+  ! -- change net --
+    change_net = .true.
+    new_net_name = 'basic.net'
+
+
+
+/ !end of star_job namelist
+
+
+&controls
+
+
+
+  !  -- output options -- 
+    history_interval = 2
+    profile_interval = 100
+    max_num_profile_models = 10000
+
+
+  ! -- mixing and exponential overshooting parameters --
+    mixing_length_alpha = 1.5
+
+    use_ledoux_criterion = .true.
+    alpha_semiconvection = 1
+    thermohaline_coeff = 0
+
+
+    overshoot_f_above_burn_he_core = 0.01
+    overshoot_f0_above_burn_he_core = 0.001
+
+
+    set_min_D_mix = .true.
+    min_D_mix = 1d-2
+    D_mix_ov_limit = 1d-2
+
+
+  ! -- mass loss --
+    use_other_wind = .true.
+    hot_wind_scheme = 'other'
+    Dutch_scaling_factor = 1
+    hot_wind_full_on_T = 1d0
+    cool_wind_full_on_T = 0d0
+    mdot_omega_power = 0
+
+
+  ! -- form of energy equation (MESA paper 4) --
+    use_dedt_form_of_energy_eqn = .true.
+    include_composition_in_eps_grav = .true.
+    convergence_ignore_equL_residuals = .true.
+    use_eosDT2 = .true.   
+    use_eosELM = .true.
+
+
+  ! -- stopping condition --
+    xa_central_lower_limit_species(1) = 'he4'
+    xa_central_lower_limit(1) = 0.01
+    !max_number_retries = 1000
+
+
+  ! -- mesh controls --
+    mesh_delta_coeff = 1
+    
+
+  ! -- timestep controls --
+    varcontrol_target = 5d-4
+    delta_lg_XH_cntr_min = -4.0d0
+
+
+  ! -- hydro info --
+    !maxT_for_gold_tolerances = 1.5d9
+    backup_hold = 5
+    retry_hold = 5  ! default 1
+
+
+  ! -- Rotation diffusion factors --
+    am_D_mix_factor = 0.0333d0
+    am_nu_factor = 1.0
+    am_gradmu_factor = 0.05
+
+    D_DSI_factor = 0
+    D_SH_factor =  1
+    D_SSI_factor = 1
+    D_ES_factor =  1
+    D_GSF_factor = 1
+    D_ST_factor = 0
+
+
+  ! -- MLT++ --
+    okay_to_reduce_gradT_excess = .true.
+
+    gradT_excess_f1 = 1d-4
+    gradT_excess_f2 = 1d-2
+    gradT_excess_age_fraction = 0.99d0
+
+    gradT_excess_lambda1 = -1
+    x_ctrl(1) = 1
+
+
+  ! -- deeper homologous mesh --
+
+    max_logT_for_k_below_const_q = 100 ! MESA default 5
+    max_q_for_k_below_const_q = 0.99  ! MESA default 1.0
+    min_q_for_k_below_const_q = 0.99 ! MESA default 0.999d0
+    max_logT_for_k_const_mass = 100 ! MESA default 6
+    max_q_for_k_const_mass = 0.98 ! MESA default 1.0
+    min_q_for_k_const_mass = 0.98 ! MESA default 0.995
+
+    fix_eps_grav_transition_to_grid = .true.
+
+
+
+
+
+/ ! end of controls namelist

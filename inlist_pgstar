@@ -1,0 +1,39 @@
+&pgstar
+
+
+
+    pgstar_interval = 2
+
+
+
+  ! -- Temp- density profile --
+
+    TRho_Profile_win_flag = .true.
+    show_TRho_Profile_legend = .true.
+    show_TRho_Profile_text_info = .true.
+    TRho_Profile_win_width = 10
+    TRho_Profile_win_aspect_ratio = 0.75
+
+
+  ! -- Mixing plot --
+
+    Mixing_win_flag = .true.
+    Mixing_xaxis_name = 'mass'
+
+
+  ! -- Grid 6 plot --
+
+    Grid6_win_flag = .true.
+
+
+  ! -- Kippenhahn window --
+
+    Kipp_win_flag = .true.
+    Kipp_show_burn = .true.
+    Kipp_show_mixing = .true.
+    Kipp_xaxis_name = 'star_age'
+
+
+    Summary_Profile_win_flag = .true.
+
+/ ! end of pgstar namelist
