@@ -1,4 +1,4 @@
-# MESA Inlist and run_stars_extras file to reproduce the results from Sabhahit et. al (2023) - Very Massive Stars and Pair-Instability Supernovae: Mass-loss Framework for low Metallicity (link)
+# MESA Inlist and run_stars_extras file to reproduce the results from Sabhahit et. al (2023) - Very Massive Stars and Pair-Instability Supernovae: Mass-loss Framework for low Metallicity (https://arxiv.org/abs/2306.11785)
 # MESA version r12115
 # Applicable Z range for VMS mass loss framework - 0.008 to 0.0002. For higher Z, see VMS_paper1 repository. 
 
