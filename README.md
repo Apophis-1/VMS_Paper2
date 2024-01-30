@@ -8,7 +8,7 @@ Mass loss for modelling the evolution of classical massive stars (10-50 Msun) is
 
 ----- For high-metallicity VMS recipe -----
 
-!! This recipe is only applicable for SMC-like or below. For high metallicity case, see 
+!! This recipe is only applicable for SMC-like or below. For high metallicity case, see VMS_paper1 repository
 
 ----- Relevant files and what they do -----
 MESA version r12115
