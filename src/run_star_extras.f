@@ -111,7 +111,7 @@
          real(dp) ::  L1, M1, T1, R1, X, Y, Z, w_vink                     ! surface properties
          real(dp) ::  Z_init, X_c, X_c_init, Y_c_init, Zsolar, const_k          
          real(dp) ::  vesc, vesc_eff, vinf, vinf_fac
-         real(dp) ::  M, Gamma_e_iter, R_iter, eta_vink, eta_switch
+         real(dp) ::  M, Gamma_e_iter, R_iter, eta_vink, eta_switch, vcrit_iter, v_sq_iter, Boost_iter, Gamma_iter 
          real(dp) ::  diff_old, diff_new, w1, w2
          real(dp) ::  vcrit, vsurf, v_vcrit_sq, Boost, alpha, Teff_jump
          real(dp) ::  w_all, w_RSG, w_WR, alfa_WR, mass_loss
@@ -182,11 +182,19 @@
                   L_iter = exp10_cr(L_iter) * Lsun
                   M_iter = M * Msun 
                   Gamma_e_iter = 10**(-4.813)*(1+X)*(L_iter/M_iter)*(Msun/Lsun)              ! electron scattering gamma_e of iteration to correct M
+                  R_iter = pow_cr((L_iter)/(4*pi*T1*T1*T1*T1*boltz_sigma), 0.5d0)
+                  
+                  vcrit_iter = pow_cr((2d0/3d0)*standard_cgrav*M_iter/R_iter, 0.5d0)/1d5
+                  vsurf = s% v_rot_avg_surf/1d5 
+                  v_sq_iter = (vsurf/vcrit_iter)**2
+
+                  alpha = 0.52d0
+                  Gamma_iter = s% photosphere_opacity * L_iter/(4*pi*standard_cgrav*clight*M_iter) 
+                  Boost_iter = (pow_cr((1-Gamma_iter), 1/alpha - 1))/(pow_cr((1-Gamma_iter - (4d0/9d0)*v_sq_iter), 1/alpha - 1))
 
                   call eval_Vink01_wind(w, vinf_fac, Teff_jump, L_iter, M_iter)
                   mdot_check = w
-
-                  R_iter = pow_cr((L_iter)/(4*pi*T1*T1*T1*T1*boltz_sigma), 0.5d0)
+                  
                   vesc = pow_cr(2d0*standard_cgrav*M_iter/R_iter, 0.5d0)/1d5
                   vesc_eff = pow_cr(2d0*standard_cgrav*M_iter*(1-Gamma_e_iter)/R_iter, 0.5d0)/1d5
                   vinf =  vinf_fac * vesc_eff * pow_cr(Z/Zsolar,0.20d0) 
@@ -241,8 +249,11 @@
          call eval_de_Jager_wind(w)                   ! de Jager recipe for below 4,000 K
          w_RSG = w
                  
-         call eval_sv2020_WR_mdot(w)                  ! Sander and Vink 2021 recipe for temperatures above 100 kK
-         w_WR = w  
+         call eval_sv2020_WR_mdot(w1)                  ! Sander and Vink 2021 recipe for temperatures above 100 kK, (Also has Vink 2017 now, but was not used in the paper)
+         call eval_v2017_WR_mdot(w2)  
+         w_WR = MAX(w1,w2)  
+
+         
 
 
          if (X_c/X_c_init > 0.999) then               ! mass loss during PMS is set to zero
@@ -277,26 +288,26 @@
    ! -------------------------------------------------------- Outputs for terminal ------------------------------------------------------------
 
          write(*,*) 'flag = ', flag
-         write(*,*) 'use_V01 = ', use_V01
-         write(*,*) 'use_VMS = ', use_VMS
-         write(*,*) 'switch_to_V01 = ', switch_to_V01
-         write(*,*) 'switch_to_VMS = ', switch_to_VMS
-         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         write(*,*) 'L switch = ', log10_cr(L_iter/Lsun)
-         write(*,*) 'M switch = ', M_iter/Msun
-         write(*,*) 'mdot switch = ', log10_cr(mdot_check)
-         write(*,*) 'vinf = ', vinf_fac 
-         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         write(*,*) 'L model = ', log10_cr(L1/Lsun)
-         write(*,*) 'M model = ', M1/Msun
-         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         write(*,*) 'eta_vink = ', eta_vink
-         write(*,*) 'eta_switch = ', eta_switch
-         write(*,*) 'Gamma_e = ', Gamma_e
-         write(*,*) 'Gamma_e at switch = ', Gamma_e_switch
-         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         write(*,*) 'Rotation boost = ', Boost
-         write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         !write(*,*) 'use_V01 = ', use_V01
+         !write(*,*) 'use_VMS = ', use_VMS
+         !write(*,*) 'switch_to_V01 = ', switch_to_V01
+         !write(*,*) 'switch_to_VMS = ', switch_to_VMS
+         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         !write(*,*) 'L switch = ', log10_cr(L_iter/Lsun)
+         !write(*,*) 'M switch = ', M_iter/Msun
+         !write(*,*) 'mdot switch = ', log10_cr(mdot_check)
+         !write(*,*) 'vinf = ', vinf_fac 
+         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         !write(*,*) 'L model = ', log10_cr(L1/Lsun)
+         !write(*,*) 'M model = ', M1/Msun
+         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         !write(*,*) 'eta_vink = ', eta_vink
+         !write(*,*) 'eta_switch = ', eta_switch
+         !write(*,*) 'Gamma_e = ', Gamma_e
+         !write(*,*) 'Gamma_e at switch = ', Gamma_e_switch
+         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         !write(*,*) 'Rotation boost = ', Boost
+         !write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
          write(*,*) 'Mdot from V01 = ', log10_cr(w_vink)
          write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
          write(*,*) 'Mdot used in evolution = ', log10_cr(mass_loss)
@@ -367,7 +378,7 @@
             real(dp) :: log10w, a, c, gamma_eb, log10w_off
             include 'formats'
 
-            a = 2.392
+            a = 2.932 
             c = -0.44*log10_cr(Z_init/Zsolar) + 9.15
             gamma_eb = -0.324*log10_cr(Z_init/Zsolar) + 0.244
             log10w_off = 0.23*log10_cr(Z_init/Zsolar) - 2.61
@@ -376,6 +387,18 @@
             w = exp10_cr(log10w)
 
          end subroutine eval_sv2020_WR_mdot
+
+
+         subroutine eval_v2017_WR_mdot(w)           ! This part of the recipe was not used in the paper
+            real(dp), intent(out) :: w
+            real(dp) :: log10w
+            
+            include 'formats'
+            
+            log10w = -13.3 + 1.36 * log10_cr(L1/Lsun) + 0.61 * log10_cr(Z_init/Zsolar)
+            w = exp10_cr(log10w)
+
+         end subroutine eval_v2017_WR_mdot
 
 
          subroutine eval_de_Jager_wind(w)
