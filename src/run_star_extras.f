@@ -152,7 +152,7 @@
          if (s% x_ctrl(1) == 0) then                                  
               open(unit = 1,file = 'LM_switch.txt',status='replace',form='formatted')       
               write(1,*) Gamma_e_switch, L_iter, M_iter, mdot_check, do_iter
-    	         close(1)
+    	      close(1)
          else if (s% x_ctrl(1) == 1 .and. check_once == 1) then          ! For helium burning, retrieve the L_switch, and do not perform the iteration at start of step
               open (unit = 2, file = 'LM_switch.txt', status = 'old')
               read(2,*) Gamma_e_switch, L_iter, M_iter, mdot_check, do_iter
@@ -243,7 +243,7 @@
          else if (use_VMS == 1 .and. switch_to_VMS == 1) then
              call eval_Vink11_wind(w, L1, M1)
              w_all = w
-  	          flag = 2
+  	     flag = 2
          end if
          
          call eval_de_Jager_wind(w)                   ! de Jager recipe for below 4,000 K
