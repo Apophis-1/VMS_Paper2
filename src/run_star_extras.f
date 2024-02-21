@@ -152,7 +152,7 @@
          if (s% x_ctrl(1) == 0) then                                  
               open(unit = 1,file = 'LM_switch.txt',status='replace',form='formatted')       
               write(1,*) Gamma_e_switch, L_iter, M_iter, mdot_check, do_iter
-    	      close(1)
+    	         close(1)
          else if (s% x_ctrl(1) == 1 .and. check_once == 1) then          ! For helium burning, retrieve the L_switch, and do not perform the iteration at start of step
               open (unit = 2, file = 'LM_switch.txt', status = 'old')
               read(2,*) Gamma_e_switch, L_iter, M_iter, mdot_check, do_iter
@@ -193,7 +193,7 @@
                   Boost_iter = (pow_cr((1-Gamma_iter), 1/alpha - 1))/(pow_cr((1-Gamma_iter - (4d0/9d0)*v_sq_iter), 1/alpha - 1))
 
                   call eval_Vink01_wind(w, vinf_fac, Teff_jump, L_iter, M_iter)
-                  mdot_check = w
+                  mdot_check = w * Boost_iter
                   
                   vesc = pow_cr(2d0*standard_cgrav*M_iter/R_iter, 0.5d0)/1d5
                   vesc_eff = pow_cr(2d0*standard_cgrav*M_iter*(1-Gamma_e_iter)/R_iter, 0.5d0)/1d5
@@ -243,7 +243,7 @@
          else if (use_VMS == 1 .and. switch_to_VMS == 1) then
              call eval_Vink11_wind(w, L1, M1)
              w_all = w
-  	     flag = 2
+  	          flag = 2
          end if
          
          call eval_de_Jager_wind(w)                   ! de Jager recipe for below 4,000 K
@@ -270,7 +270,6 @@
          else if (T1 > 9d4 .and. T1 < 1d5) then
               alfa_WR = (T1 - 9d4) / (1d4)
               mass_loss = alfa_WR * w_WR + (1 - alfa_WR) * w_all
-         
          end if
 
    ! -------------------------------------------------------- For rotation only ---------------------------------------------------------------
@@ -292,22 +291,22 @@
          !write(*,*) 'use_VMS = ', use_VMS
          !write(*,*) 'switch_to_V01 = ', switch_to_V01
          !write(*,*) 'switch_to_VMS = ', switch_to_VMS
-         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         !write(*,*) 'L switch = ', log10_cr(L_iter/Lsun)
-         !write(*,*) 'M switch = ', M_iter/Msun
+         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         write(*,*) 'L switch = ', log10_cr(L_iter/Lsun)
+         write(*,*) 'M switch = ', M_iter/Msun
          !write(*,*) 'mdot switch = ', log10_cr(mdot_check)
          !write(*,*) 'vinf = ', vinf_fac 
-         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         !write(*,*) 'L model = ', log10_cr(L1/Lsun)
-         !write(*,*) 'M model = ', M1/Msun
-         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         write(*,*) 'L model = ', log10_cr(L1/Lsun)
+         write(*,*) 'M model = ', M1/Msun
+         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
          !write(*,*) 'eta_vink = ', eta_vink
          !write(*,*) 'eta_switch = ', eta_switch
-         !write(*,*) 'Gamma_e = ', Gamma_e
-         !write(*,*) 'Gamma_e at switch = ', Gamma_e_switch
-         !write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-         !write(*,*) 'Rotation boost = ', Boost
-         !write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         write(*,*) 'Gamma_e = ', Gamma_e
+         write(*,*) 'Gamma_e at switch = ', Gamma_e_switch
+         write(*,*) '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+         write(*,*) 'Rotation boost = ', Boost
+         write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
          write(*,*) 'Mdot from V01 = ', log10_cr(w_vink)
          write(*,*) '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
          write(*,*) 'Mdot used in evolution = ', log10_cr(mass_loss)
@@ -315,11 +314,6 @@
 
 
          w = s% Dutch_scaling_factor * mass_loss
-
-
-
-
-
 
 
          contains
