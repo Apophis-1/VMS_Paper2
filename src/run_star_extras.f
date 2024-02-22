@@ -140,6 +140,7 @@
          Z_init = s% initial_z                                          ! mdot scaling with Z_fe for Vink recipe
          X_c = s% xa(s%net_iso(ih1),nz)                                 ! central X
          Y_c_init = 0.24 + 2*Z_init
+         !Y_c_init = s% initial_y                                       ! if an initial y is given in the inlist file, use this line instead
          X_c_init = 1 - Y_c_init - Z_init
          Gamma_e = 10**(-4.813)*(1+X)*(L1/M1)*(Msun/Lsun)               ! electron scattering Eddington parameter
 
