@@ -14,6 +14,11 @@ The applicable Z range for the VMS mass loss framework in this study is 0.004 to
 3. WR stars : Sander & Vink (2020)
 4. Cool supergiants : de Jager (1988)
 
+IMPORTANT NOTE: There are some small differences between the run_stars uploaded here on Github and the one used in the paper.
+1. Vink (2017) is now called for mass loss rates of stripped low mass helium stars. This is done by chosing the maximum between Vink (2017) rates and Sander & Vink (2020) rates. This is called in LINE 255.
+2. Maeder and Meynet (2000) rotation boost is set to DEFAULT ON in the run_stars file here. Since the mass loss boost is default on, set     "mdot_omega_power = 0"    in the inlist to prevent double boosting. If one wants the Friend & Abbott boost, comment out lines 197 and 285, and uncomment lines 198 and 286. Then turn on the MESA boost line.
+
+
 ----- Relevant files and what they do -----
 MESA version r12115
 1. run_iteration.py: python script to run multiple models back to back. 
