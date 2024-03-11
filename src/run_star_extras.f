@@ -195,6 +195,7 @@
 
                   call eval_Vink01_wind(w, vinf_fac, Teff_jump, L_iter, M_iter)
                   mdot_check = w * Boost_iter
+                  !mdot_check = w
                   
                   vesc = pow_cr(2d0*standard_cgrav*M_iter/R_iter, 0.5d0)/1d5
                   vesc_eff = pow_cr(2d0*standard_cgrav*M_iter*(1-Gamma_e_iter)/R_iter, 0.5d0)/1d5
@@ -282,6 +283,7 @@
          alpha = 0.52d0
          Gamma = s% photosphere_opacity * L1/(4*pi*standard_cgrav*clight*M1) 
          Boost = (pow_cr((1-Gamma), 1/alpha - 1))/(pow_cr((1-Gamma - (4d0/9d0)*v_vcrit_sq), 1/alpha - 1))
+         !Boost = 1
          Omega_Gamma = Gamma/(1-(4d0/9d0)*v_vcrit_sq)
          mass_loss = Boost * mass_loss
 
