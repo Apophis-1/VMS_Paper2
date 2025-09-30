@@ -13,7 +13,7 @@ Mass loss for classical massive stars (10-50 M☉) with optically-thin winds is 
 
 We use two different ways to estimate the transition mass loss point based on the presence or absence of observed VMSs:
 
-**For high metallicity (GAL and LMC-like):** The transition mass-loss rate is obtained using the observed luminosities of the Of/WNh stars in the Arches cluster in our own galaxy and the 30 Dor in the LMC. For the high Z implementation, see the [VMS_paper1 repository](https://github.com/gautham-sabhahit/VMS_paper1) and [Sabhahit et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.3736S/abstract) - Mass-loss implementation and temperature evolution of very massive stars.
+**For high metallicity (GAL and LMC-like):** The transition mass-loss rate is obtained using the observed luminosities of the Of/WNh stars in the Arches cluster in our own galaxy and the 30 Dor in the LMC. For the high Z implementation, see the [VMS_paper1 repository](https://github.com/Apophis-1/VMS_Paper1) and [Sabhahit et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.3736S/abstract) - Mass-loss implementation and temperature evolution of very massive stars.
 
 **For low metallicity (SMC-like or below):** We do not have observed individual VMS in low metallicity environments to get the transition point. In the absence of such a large sample of VMS, we make use of both the concepts of transition mass loss point from [Vink & Gräfener (2012)](https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..34V/abstract) and hydro-dynamically consistent PoWR atmosphere models to construct the new implementation.
 
