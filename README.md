@@ -1,4 +1,7 @@
-MESA Inlist and run_stars_extras file to reproduce the results from Sabhahit et. al (2023) - Very Massive Stars and Pair-Instability Supernovae: Mass-loss Framework for low Metallicity (https://arxiv.org/abs/2306.11785)
+MESA Inlist and run_stars_extras file to reproduce the results from Sabhahit et. al (2023) - Very Massive Stars and Pair-Instability Supernovae: Mass-loss Framework for low Metallicity 
+PDF links: 
+https://arxiv.org/abs/2306.11785
+https://academic.oup.com/mnras/article/524/1/1529/7209169?searchresult=1
 
 Mass loss from optically-thin winds of classical massive stars (10-50 Msun) is typically taken from Vink et al. (2000, 2001). The mass loss from Vink et al. (2000, 2001) has a shallow dependence on the Eddington parameter. However a steeper scaling of mass loss in proximity to the Eddington limit has been found in Vink et al. (2011). This study implements mass loss scaling from Vink et al. (2011) for very massive stars. The switch from a shallow to steeper scaling occurs at the transition mass loss point as proposed in Vink et al. (2012).
 
