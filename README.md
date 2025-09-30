@@ -3,7 +3,7 @@
 MESA Inlist and run_stars_extras file to reproduce the results from [Sabhahit et al. (2023)](https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1529S/abstract) - Very Massive Stars and Pair-Instability Supernovae: Mass-loss Framework for low Metallicity
 
 **Links:**
-- https://arxiv.org/abs/2306.11785
+- https://arxiv.org/pdf/2306.11785
 - https://academic.oup.com/mnras/article/524/1/1529/7209169?searchresult=1
 - https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1529S/abstract
 
