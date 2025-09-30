@@ -22,25 +22,25 @@ We use two different ways to estimate the transition mass loss point based on th
 ### Summary of Mass Loss Used
 
 1. **O stars:** Vink et al. (2000, 2001)
-2. **VMS:** Scaling from [Vink et al. (2011)](https://ui.adsabs.harvard.edu/abs/2011A%26A...531A.132V/abstract) and absolute rate fixed at the transition mass loss point from both hydro-dynamically consistent PoWR atmosphere models and [Vink & Gräfener (2012)](https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..34V/abstract)
+2. **VMS:** Scaling from [Vink et al. (2011)](https://ui.adsabs.harvard.edu/abs/2011A%26A...531A.132V/abstract) and absolute rate fixed at the transition mass loss point from bothydro-dynamically consistent PoWR atmosphere models and [Vink & Gräfener (2012)](https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..34V/abstract)
 3. **WR stars:** Sander & Vink (2020)
 4. **Cool supergiants:** de Jager (1988)
 
 ### Important Note
 
-There are some small differences between the run_stars uploaded here on Github and the one used in the paper:
+There are some small differences between the run_stars uploadedere on Github and the one used in the paper:
 
-1. **Vink (2017) for stripped low mass helium stars:** This is now called for mass loss rates of stripped low mass helium stars. This is done by choosing the maximum between Vink (2017) rates and Sander & Vink (2020) rates. This is called in LINE 255.
+1. **Vink (2017) for stripped low masselium stars:** This is now called for mass loss rates of stripped low masselium stars. This is done by choosing the maximum between Vink (2017) rates and Sander & Vink (2020) rates. This is called in LINE 255.
 
-2. **Maeder and Meynet (2000) rotation boost:** Set to DEFAULT ON in the run_stars file here. Since the mass loss boost is default on, set `mdot_omega_power = 0` in the inlist to prevent double boosting. If one wants the Friend & Abbott boost, comment out lines 197 and 285, and uncomment lines 198 and 286. Then turn on the MESA boost line.
+2. **Maeder and Meynet (2000) rotation boost:** Set to DEFAULT ON in the run_stars fileere. Since the mass loss boost is default on, set `mdot_omega_power = 0` in the inlist to prevent double boosting. If one wants the Friend & Abbott boost, comment out lines 197 and 285, and uncomment lines 198 and 286. Then turn on the MESA boost line.
 
 ## Relevant Files and What They Do
 
 **MESA version:** r12115
 
 1. **`run_iteration.py`**: Python script to run multiple models back to back
-2. **`inlist_project_H`** and **`inlist_project_H_LOGS`**: MESA inlists for core H burning evolution
-3. **`inlist_project_He`** and **`inlist_project_He_LOGS`**: MESA inlists for core He burning evolution
+2. **`inlist_project_H`** and **`inlist_project_H_LOGS`**: MESA inlists for core hydrogen burning evolution
+3. **`inlist_project_He`** and **`inlist_project_He_LOGS`**: MESA inlists for core helium burning evolution
 4. **`/src/run_star_extras.f`**: run_stars file with the low metallicity VMS mass loss framework implementation
 
 ## Usage
